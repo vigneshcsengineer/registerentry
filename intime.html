@@ -1,0 +1,56 @@
+<html>
+<head>
+    <title>Attendance Form</title>
+    <link rel="stylesheet" href="intime.css">
+</head>
+<body>
+    <h1>Attendance Form</h1>
+    <form method="POST" action="insert.php">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required><br><br>
+
+        <label for="register-number">Register Number:</label>
+        <input type="text" id="register-number" name="register-number" required><br><br>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required><br><br>
+
+        <label for="date">Date:</label>
+        <input type="date" id="date" name="date" value="<?php echo date('Y-m-d'); ?>" readonly><br><br>
+
+        <label for="time">Time:</label>
+        <input type="text" id="time" name="time" value="<?php echo date('H:i:s'); ?>" readonly><br><br>
+
+        <input type="submit" value="Submit">
+        <input type="submit" onclick="window.location.href='index.html';" value="Back">
+
+
+    </form>
+
+    <script>
+        // Get the current date and time
+        var now = new Date();
+
+        // Format the date and time strings in a user-friendly way
+        var dateString = now.getFullYear() + "-" +
+                          ('0' + (now.getMonth()+1)).slice(-2) + "-" +
+                          ('0' + now.getDate()).slice(-2);
+
+        var timeString = ('0' + now.getHours()).slice(-2) + ":" +
+                         ('0' + now.getMinutes()).slice(-2) + ":" +
+                         ('0' + now.getSeconds()).slice(-2);
+
+        // Set the value of the date and time fields to the formatted date and time strings
+        document.getElementById("date").value = dateString;
+        document.getElementById("time").value = timeString;
+
+        document.querySelector("form").addEventListener("submit", function(event) {
+            var email = document.querySelector("#email").value;
+            if (!email.endsWith("@kanchiuniv.ac.in")) {
+                alert("Please enter a valid email address ending with '@kanchiuniv.ac.in'.");
+                event.preventDefault();
+            }
+        });
+    </script>
+</body>
+</html>

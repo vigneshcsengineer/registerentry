@@ -1,0 +1,73 @@
+<html>
+<head>
+    <title>Attendance Outtime Form</title>
+    <link rel="stylesheet" href="outtime.css">
+</head>
+<body>
+    <div class="form-container">
+        <h2>Attendance Outtime Form</h2>
+        <form method="POST" action="update.php">
+            <div class="form-group">
+                <label>Register Number:</label>
+                <input type="text" name="register-number" required>
+            </div>
+
+            <div class="form-group">
+                <label>Date:</label>
+                <input type="date" id="date" name="date" value="<?php echo date('Y-m-d'); ?>" readonly>
+            </div>
+
+            <div class="form-group">
+                <button type="submit" class="btn-submit">Submit</button>
+                <button type="button" class="btn-back" onclick="goBack()">Back</button>
+            </div>
+                
+        </form>
+    </div>
+
+    <script>
+        // Get the current date and format it in a user-friendly way
+        var now = new Date();
+        var dateString = now.getFullYear() + "-" + ('0' + (now.getMonth()+1)).slice(-2) + "-" + ('0' + now.getDate()).slice(-2);
+
+        // Set the value of the date field to the formatted date string
+        document.getElementById("date").value = dateString;
+
+        // Show a pop-up message on form submission
+        document.querySelector("form").addEventListener("submit", function(event) {
+            event.preventDefault();
+            var form = document.querySelector("form");
+            var registerNumber = form.querySelector("input[name='register-number']").value;
+            var date = form.querySelector("input[name='date']").value;
+            var message = "Register Number: " + registerNumber + "\n" + "Date: " + date;
+            alert(message);
+            form.submit();
+        });
+
+        // Redirect to index.html when the "Back" button is clicked
+        function goBack() {
+            window.location.href = "index.html";
+        }
+    </script>
+</body>
+</html>
+
+<style>
+    .btn-submit, .btn-back {
+        background-color: #4CAF50; /* Green */
+        border: none;
+        color: white;
+        padding: 16px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+        border-radius: 10px;
+    }
+
+    .btn-back {
+        background-color: #f44336; /* Red */
+    }
+</style>
